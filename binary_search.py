@@ -18,15 +18,9 @@ def binary_search(array, element, low, high):
 def insertion_sort(array, element):
     insert_idx = binary_search(array, element, 0, len(array) - 1)
 
-    # Just append last element to the end so that elements are properly shifted
-    array.append(array[len(array) - 1])
-
-    for i in range(len(array) - 1, insert_idx, -1):
-        array[i] = array[i - 1]
-
-    array[insert_idx] = element
-
-    return array
+    return array[:insert_idx] + [element] + array[insert_idx:]
+    #
+    # return out
 
 
 # total_iterations = 0
@@ -37,7 +31,7 @@ arr = [0, 4, 8, 10, 12, 18]
 
 arr = [5, 10, 20, 30]
 arr = [5, 10, 20, 30, 50]
-# arr = [5, 10]
+# arr = []
 print(binary_search(arr, 70, 0, len(arr) - 1))
 
-print(insertion_sort(arr, 25))
+print(insertion_sort(arr, 35))
