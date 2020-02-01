@@ -44,16 +44,40 @@ def build_max_heap(array):
     for i in range(len(array) // 2, -1, -1):
         max_heapify(i, array)
 
+def heap_sort(unordered_array):
+    ordered_array = []
 
-arr = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+    while len(unordered_array) > 0:
+        build_max_heap(unordered_array)
 
-print(left_child_of_element(3, arr))
-print(right_child_of_element(3, arr))
+        n = len(unordered_array)
+
+        first_element = unordered_array[0]
+
+        unordered_array[0] = unordered_array[n - 1]
+
+        unordered_array[n - 1] = first_element
+
+        ordered_array.append(unordered_array.pop())
+
+        max_heapify(0, unordered_array)
+
+    return ordered_array
+
+
+
+
+
+# arr = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+
+# print(left_child_of_element(3, arr))
+# print(right_child_of_element(3, arr))
 
 arr2 = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
 
 # max_heapify(1, arr2)
 
-build_max_heap(arr2)
-print(arr2)
+# build_max_heap(arr2)
+# print(arr2)
 
+print(heap_sort(arr2))
