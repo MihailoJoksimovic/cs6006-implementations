@@ -1,5 +1,7 @@
 from collections import deque
 
+# Binary search trees are good for scheduling and checking.
+
 
 class Node:
 
