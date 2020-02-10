@@ -2,36 +2,44 @@ from collections import deque
 
 class Node:
 
-    def __init__(self, value, height = 0, parent = None, left = None, right = None):
+    def __init__(self, value, parent = None):
         self.value = value
-        self.height = height
+
         self.parent = parent
-        self.left = left
-        self.right = right
+
+        self.left = None
+        self.right = None
+
+    def height(self):
+        if self.left_height() > self.right_height():
+            return self.left_height()
+        else:
+            return self.right_height()
+
+    def left_height(self):
+        return self.left.height() + 1 if self.left else 0
+
+    def right_height(self):
+        return self.right.height() + 1 if self.right else 0
 
     def insert(self, value):
-        if self.left is None and self.right is None:
-            # So we just added one more level basically
-            self.height += 1
-
-            if self.parent and self.parent.height < (self.height + 1):
-                # Well, parent's height needs to increase as well :)
-                self.parent.height += 1
+        if value == self.value:
+            return
 
         if value < self.value:
             if self.left is None:
-                self.left = Node(value, height = 0, parent=self)
+                self.left = Node(value, self)
             else:
                 self.left.insert(value)
 
         if value > self.value:
             if self.right is None:
-                self.right = Node(value, height = 0, parent=self)
+                self.right = Node(value, self)
             else:
                 self.right.insert(value)
 
 def visit(node: Node):
-    print("Value: {}, Height: {}".format(node.value, node.height))
+    print("Value: {}, Left: {}, Right: {}".format(node.value, node.left_height(), node.right_height()))
 
 
 def print_binary_search_tree(root: Node):
