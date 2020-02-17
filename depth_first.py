@@ -12,11 +12,15 @@ graph = {
     'g': ['d']
 }
 
+visiting_order = []
+
 
 def depth_first_search(start_node, adjacency_list, parents, visiting):
     neighbors = adjacency_list[start_node]
 
     print("Visiting {}".format(start_node))
+
+    visiting_order.append(start_node)
 
     if len(neighbors) == 0:
         # This is a leaf node :)
@@ -50,6 +54,6 @@ for vertex in graph.keys():
 
     depth_first_search(vertex, graph, parents, visiting = {})
 
-# Lets do a classification of nodes now
-
+visiting_order.reverse()
+print(visiting_order)
 
