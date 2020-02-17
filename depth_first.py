@@ -20,12 +20,6 @@ def depth_first_search(start_node, adjacency_list, parents, visiting):
 
     print("Visiting {}".format(start_node))
 
-    visiting_order.append(start_node)
-
-    if len(neighbors) == 0:
-        # This is a leaf node :)
-        return
-
     visiting[start_node] = True
 
     for neighbor in neighbors:
@@ -39,6 +33,8 @@ def depth_first_search(start_node, adjacency_list, parents, visiting):
             depth_first_search(neighbor, adjacency_list, parents, visiting)
 
     del visiting[start_node]
+
+    visiting_order.append(start_node)
 
 # depth_first_search('a', graph)
 
@@ -57,3 +53,30 @@ for vertex in graph.keys():
 visiting_order.reverse()
 print(visiting_order)
 
+print("New graph!!!")
+
+graph = {
+    5: [11],
+    7: [8, 11],
+    3: [8, 10],
+    11: [2, 9, 10],
+    8: [9],
+    2: [],
+    9: [],
+    10: []
+}
+
+visiting_order = []
+
+parents = {}
+
+for vertex in graph.keys():
+    if vertex in parents:
+        continue
+
+    parents[vertex] = None
+
+    depth_first_search(vertex, graph, parents, visiting = {})
+
+visiting_order.reverse()
+print(visiting_order)
