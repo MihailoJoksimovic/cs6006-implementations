@@ -173,3 +173,77 @@ def array_to_binary_tree(array: list):
 
 
 
+class StackNode:
+    def __init__(self, value, next = None):
+        self.value = value
+        self.next = next # type: StackNode
+
+
+class Stack:
+    def __init__(self):
+        self.top = None # type: StackNode
+
+    def push(self, value):
+        new_node = StackNode(value)
+
+        if self.top:
+            new_node.next = self.top
+
+        self.top = new_node
+
+    def pop(self):
+        if self.top is None:
+            return None
+
+        next_top = self.top.next
+
+        top = self.top
+
+        self.top = next_top
+
+        return top.value
+
+    def peek(self):
+        return self.top.value if self.top else None
+
+    def empty(self):
+        return self.top is None
+
+
+class QueueNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None # type: QueueNode
+
+
+class MyQueue:
+    def __init__(self):
+        self.first = None
+        self.last = None
+
+    def add(self, value):
+        new_node = QueueNode(value)
+
+        if self.first is None:
+            self.first = new_node
+
+            self.last = new_node
+
+            return
+
+        self.last.next = new_node
+
+        self.last = new_node
+
+    def remove(self):
+        if self.first is None:
+            return None
+
+        node = self.first
+
+        self.first = node.next
+
+        return node.value
+
+    def empty(self):
+        return self.first is None
