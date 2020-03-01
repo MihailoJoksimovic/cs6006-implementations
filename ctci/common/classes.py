@@ -125,3 +125,51 @@ def find_node_in_binary_tree(root_node: Node, value):
             frontier.put(node.right_child)
 
     return None
+
+
+def array_to_binary_tree(array: list):
+    """Builds a binary tree out of given list"""
+
+    root_node = Node(array[0])
+
+    array = array[1:]
+
+    queue = Queue()
+
+    queue.put(root_node)
+
+    current_node = root_node
+
+    while not queue.empty():
+
+        if current_node.left_child is not None and current_node.right_child is not None:
+            current_node = queue.get()
+
+            if current_node == root_node:
+                continue
+
+        if len(array) == 0:
+            break
+
+        element = array[0]
+
+        array = array[1:]
+
+        if current_node.left_child is None:
+            current_node.left_child = Node(element)
+
+            queue.put(current_node.left_child)
+
+            continue
+
+        if current_node.right_child is None:
+            current_node.right_child = Node(element)
+
+            queue.put(current_node.right_child)
+
+            continue
+
+    return root_node
+
+
+
