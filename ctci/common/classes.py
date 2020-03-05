@@ -247,3 +247,36 @@ class MyQueue:
 
     def empty(self):
         return self.first is None
+
+class ListNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None  # type: ListNode
+
+class SinglyLinkedList:
+    def __init__(self, head = None):
+        self.head = head # type: ListNode
+        self.tail = head # type: ListNode
+
+    def add(self, value):
+        if self.head is None:
+            self.head = ListNode(value)
+            self.tail = self.head
+        else:
+            self.tail.next = ListNode(value)
+            self.tail = self.tail.next
+
+        return self
+
+    def getiterator(self):
+        current = self.head # type: ListNode
+
+        yield current
+
+        while current.next:
+            yield current.next
+
+            current = current.next
+
+
+

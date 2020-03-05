@@ -4,10 +4,10 @@ from __future__ import annotations
 
 class Node:
     def __init__(self, value):
-        self.next = None
+        self.next = None # type: Node
         self.value = value
 
-    def addNext(self, node):
+    def addNext(self, node: Node):
         self.next = node
         return node
 
